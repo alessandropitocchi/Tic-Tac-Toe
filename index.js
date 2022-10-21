@@ -2,9 +2,13 @@
 
 "use strict";
 
+let pname1 = ''
+let pname2 = ''
+
 const Player = (sign) => {
     const getSign = () => { return sign; }
     
+   
     return {
         getSign
     }
@@ -34,9 +38,37 @@ const gameBoard = (() => {
     }
 })()
 
+const titleScreen = (()=>{
+    const titleScreen = document.querySelector('.titleScreen')
+    const startGameBtn = document.querySelector('.startGameBtn')
+    const message = document.querySelector('.message')
+    const playerName = document.querySelector('.playerName')
+
+    startGameBtn.addEventListener('click', () => {
+        titleScreen.classList.remove('active')
+        titleScreen.classList.add('hidden')
+        const player1 = document.getElementById('player1').value
+        const player2 = document.getElementById('player2').value
+        pname1 = player1
+        pname2 = player2
+        message.textContent = `${pname1}, make your move!`
+    })
+
+    const resetScreen = () =>{
+        titleScreen.classList.add('active')
+        titleScreen.classList.remove('hidden')
+        playerName.reset()
+    }
+
+    return{
+        resetScreen
+    }
+})()
+
 const displayController = (() =>{
     const cells = document.querySelectorAll('.element')
     const resetBtn = document.querySelector('.resetBtn')
+    const homeBtn = document.querySelector('.homeBtn')
     const message = document.querySelector('.message')
 
     cells.forEach(cell => {
@@ -52,6 +84,12 @@ const displayController = (() =>{
         gameBoard.resetBoard()
         updateGameBoard()
         setMessage("")
+        message.classList.remove('fs')
+        message.textContent = `${pname1}, make your move!`
+    })
+
+    homeBtn.addEventListener('click', () => {
+        location.reload()
     })
 
     const updateGameBoard = () => {
@@ -68,7 +106,13 @@ const displayController = (() =>{
         if (result === "Draw"){
             setMessage("It's a draw")
         } else {
-            setMessage(`Player ${result} has won!`)
+            message.classList.add('fs')
+            if (result === 'X') {
+                setMessage(`${pname1} has won!`)
+            } else{
+                setMessage(`${pname1} has won!`)
+            }
+            
         }
     }
  
@@ -131,7 +175,7 @@ const gameController = (() => {
             return;
         }
         _round += 1
-        displayController.setMessage(`Player ${getCurrentSign()}'s turn`);
+        displayController.setMessage(`${getCurrentSign() === 'X' ? pname1 : pname2}, make your move!`);
     }
 
     return{

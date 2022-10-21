@@ -12,11 +12,26 @@
 </head>
 <body>
     <header class="header">
-        <h1>Tic Tac Toe</h1>
+        <h1 class="title"><span class="Tic">Tic</span> <span class="Tac">Tac</span> <span class="Toe">Toe</span></h1>
         <p class="message"></p>
     </header>
 
     <main class="main">
+        <div class="titleScreen active">
+            <h1 class="title"><span class="Tic">Tic</span> <span class="Tac">Tac</span> <span class="Toe">Toe</span></h1>
+            <div class="playerName">
+                <div class="input">
+                    <label for="player1">Player 1 Name:</label>
+                    <input type="text" class="player1" name="player1" id="player1" placeholder="Name...">
+                </div>
+                <div class="input">
+                    <label for="player2">Player 2 Name:</label>
+                    <input type="text" class="player2" name="player2" id="player2" placeholder="Name...">
+                </div>
+            </div>
+            <button class="startGameBtn btn">Start Game</button>
+        </div>
+
         <div class="gameBoard">
             <span class="element" data-index='0'></span>
             <span class="element" data-index='1'></span>
@@ -29,8 +44,9 @@
             <span class="element" data-index='8'></span>
         </div>
 
-        <div>
-            <button class="resetBtn">reset</button>
+        <div class="btnContainer">
+            <button class="resetBtn btn">Restart</button>
+            <button class="homeBtn btn">Home</button>
         </div>
 
         <div>
